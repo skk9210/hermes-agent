@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: hermes-agent
+    runtime: docker
+
+    # Starter plan is the minimum — free tier sleeps and resets memory
+    plan: starter
+
+    autoDeploy: true
+
+    # Persistent disk keeps Hermes memory, skills, sessions and configs
+    # across restarts. Without this everything is lost on redeploy.
+    disk:
+      name: hermes-data
+      mountPath: /data
+      sizeGB: 10
+
+    envVars:
+      - key: HERMES_HOME
+        value: /data/.hermes
+
+      # OpenRouter key — set this value in the Render dashboard (not here)
+      - key: OPENROUTER_API_KEY
+        sync: false
+
+      # Optional: pin a default model for Hermes to use
+      # - key: HERMES_MODEL
+      #   value: openai/gpt-4o
+
+      - key: PORT
+        value: "8000"
