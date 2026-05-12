@@ -33,5 +33,8 @@ ENV PORT=8000
 
 EXPOSE 8000
 
-# Start Hermes in gateway (API server) mode
-CMD ["bash", "-c", "hermes gateway --host 0.0.0.0 --port ${PORT}"]
+# Write a startup script so logic is readable and easy to debug
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+CMD ["/docker-entrypoint.sh"]

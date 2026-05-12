@@ -23,9 +23,17 @@ services:
       - key: OPENROUTER_API_KEY
         sync: false
 
-      # Optional: pin a default model for Hermes to use
-      # - key: HERMES_MODEL
-      #   value: openai/gpt-4o
+      # Provider — entrypoint script reads this to auto-configure Hermes
+      - key: HERMES_PROVIDER
+        value: openrouter
+
+      # Default model — change to any OpenRouter model slug you prefer:
+      #   deepseek/deepseek-chat         (cheap + great coding)
+      #   anthropic/claude-sonnet-4      (best reasoning)
+      #   google/gemini-2.5-pro          (huge context)
+      #   qwen/qwen3-235b-a22b           (massive open-weight)
+      - key: HERMES_MODEL
+        value: deepseek/deepseek-chat
 
       - key: PORT
         value: "8000"
